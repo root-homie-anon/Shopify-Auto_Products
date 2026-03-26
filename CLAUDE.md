@@ -1,0 +1,182 @@
+# Banyakob — Master Project File
+
+## System Overview
+Banyakob is a Christian lifestyle apparel brand selling DTG-printed t-shirts through Shopify and Etsy, fulfilled via CustomCat. The system automates the full commerce pipeline — product listing creation, order fulfillment routing, and storefront management — so the operator spends time only on design and marketing decisions. Everything else runs without manual intervention.
+
+---
+
+## Session Start Hook
+On every session start, fire the agent factory hook:
+```
+bash ~/.claude/hooks/session-start.sh "banyakob" "$(pwd)"
+```
+This loads existing agents, offers to create new ones if needed, and prepares the session.
+
+---
+
+## Orchestrator Behavior
+
+This file is the root orchestrator. On session start:
+
+1. Fire the session-start hook
+2. Load state from `state/` if it exists
+3. Ask the user: continue existing run, start a new one, or initialize a new sub-project
+4. Spawn subagents scoped to their domain — they share no state unless explicitly passed
+5. Multiple subagents can run in parallel
+
+---
+
+## Agent Team
+All agents live in `.claude/agents/` and are shared across the project.
+
+| Agent | Role |
+|-------|------|
+| `@orchestrator` | Drives the session, delegates tasks, manages state |
+| `@store-manager` | Manages Shopify store — product listings, collections, metadata, pricing |
+| `@listing-publisher` | Takes finalized designs and publishes formatted listings to Shopify and Etsy |
+| `@fulfillment-monitor` | Monitors CustomCat order status, flags delays or errors |
+
+---
+
+## Project Structure
+
+```
+banyakob/
+├── CLAUDE.md                  ← this file, root orchestrator
+├── .claude/
+│   └── agents/                ← all agent definitions
+├── .env                       ← secrets, never committed
+├── .env.example               ← committed, documents required vars
+├── .github/
+│   └── workflows/             ← CI/CD pipelines
+├── src/                       ← application source
+├── scripts/                   ← automation scripts
+├── state/                     ← runtime state, gitignored
+├── shared/                    ← shared resources
+│   ├── brand-guidelines.md    ← visual identity, tone, design language
+│   └── listing-template.md   ← product title, description, tag templates
+└── config.json                ← project config schema (see below)
+```
+
+---
+
+## config.json Schema
+
+```json
+{
+  "project": {
+    "name": "Banyakob",
+    "slug": "banyakob",
+    "version": "1.0.0"
+  },
+  "credentials": {
+    "shopify_api_key": ".env",
+    "shopify_api_secret": ".env",
+    "etsy_api_key": ".env",
+    "customcat_api_key": ".env"
+  },
+  "agents": {},
+  "features": {
+    "etsy_sync": true,
+    "fulfillment_monitoring": true,
+    "listing_automation": true
+  }
+}
+```
+
+---
+
+## Platform Stack
+
+| Layer | Tool |
+|-------|------|
+| Storefront | Shopify |
+| Marketplace | Etsy (connected via Shopify) |
+| Fulfillment | CustomCat |
+| Design generation | AI — prompt engineering owned by operator |
+| Listing copy | Claude (batch via prompt template) |
+
+---
+
+## Brand Identity
+
+- **Brand name:** Banyakob
+- **Niche:** Christian lifestyle apparel
+- **Aesthetic:** Byzantine / Orthodox icon art meets urban streetwear — gold tones, sacred geometry, iconographic linework, modern composition
+- **Logo:** Gold lion head — stays as-is, not subject to redesign
+- **Tone:** Elevated, cultural, faith-driven — not generic church merch
+- **Target buyer:** Faith-driven urban consumers across demographics — self-selects via aesthetic
+
+---
+
+## Product Specs
+
+- **Blank:** Bella+Canvas 3001
+- **Print method:** DTG — front and back
+- **Print area:** TBD — confirm with CustomCat before designing
+- **Fulfillment:** CustomCat — 2-3 business day production, US-based
+- **Branding:** Packing insert card — specs and fee TBD, confirm with CustomCat
+
+---
+
+## GitHub Workflow
+
+- `main` — production, protected, no direct pushes
+- `dev` — integration branch
+- `feature/[slug]` — per-feature branches, PR into dev
+- `release/[version]` — cut from dev, merge into main
+
+CI runs on every PR: lint → typecheck → test → build.
+Deployments trigger automatically on merge to `main`.
+
+---
+
+## Shared Resources
+
+### API Keys
+All keys in `.env` at project root. See `.env.example` for required vars. Never commit `.env`.
+
+### Shared Utilities
+```
+shared/
+├── brand-guidelines.md    ← visual identity, tone, color palette, design language
+└── listing-template.md   ← reusable product title, description, and tag structure
+```
+
+---
+
+## Automation Assumptions
+- Everything is automated unless explicitly noted as human-handled
+- All long-running tasks are async with state written to `state/`
+- Agents are stateless — all context passed explicitly per invocation
+- Errors surface to a notification channel (configure in `.env`)
+- No manual steps in the critical path
+
+**Human-handled tasks:**
+- AI design prompt engineering and design generation
+- Final design approval before publishing
+
+---
+
+## Code Standards
+- TypeScript strict mode — no `any`, explicit return types
+- Naming: kebab-case files, PascalCase classes/types, camelCase functions, UPPER_SNAKE_CASE constants
+- Formatting: Prettier, single quotes, semicolons, 2-space indent, 100 char line width
+- Imports: external libs → internal utils → services → types
+- Async: always async/await, never callbacks
+- Errors: custom error classes per domain
+
+---
+
+## Action Items — Pending Before Build
+
+- [ ] Confirm CustomCat Bella+Canvas 3001 exact print area specs — front and back
+- [ ] Confirm CustomCat packing insert specs, per-order fee, and inventory ship-to address
+- [ ] Design prompt engineering — owned by operator
+
+## Initialization Checklist
+- [ ] Clone repo and run `npm install`
+- [ ] Copy `.env.example` → `.env` and fill in all values
+- [ ] Run `bash ~/.claude/hooks/session-start.sh "banyakob" "$(pwd)"`
+- [ ] Verify agents load correctly
+- [ ] Confirm CI pipeline is green
