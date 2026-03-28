@@ -85,7 +85,15 @@ async function readJsonFile(filePath: string): Promise<unknown> {
   }
 
   try {
-    return JSON.parse(raw);
+    return JSON.parse(raw, (_key: string, value: unknown): unknown => {
+      if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(value)) {
+        const date = new Date(value);
+        if (!Number.isNaN(date.getTime())) {
+          return date;
+        }
+      }
+      return value;
+    });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
     throw new CliError(`File is not valid JSON (${resolved}): ${message}`);

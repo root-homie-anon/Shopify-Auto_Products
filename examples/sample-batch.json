@@ -1,0 +1,82 @@
+[
+  {
+    "id": "prod-001",
+    "title": "Byzantine Lion Tee",
+    "description": "Gold-toned Byzantine lion iconography on premium Bella+Canvas 3001",
+    "design": {
+      "id": "design-001",
+      "name": "Byzantine Lion",
+      "frontImageUrl": "https://cdn.example.com/designs/byzantine-lion-front.png",
+      "backImageUrl": "https://cdn.example.com/designs/byzantine-lion-back.png",
+      "createdAt": "2026-03-28T00:00:00.000Z",
+      "approvedAt": "2026-03-28T12:00:00.000Z"
+    },
+    "variants": [
+      { "size": "S", "color": "Black", "sku": "BYK-BZLN-BLK-S", "price": 34.99, "compareAtPrice": 44.99, "inventoryQuantity": 100 },
+      { "size": "M", "color": "Black", "sku": "BYK-BZLN-BLK-M", "price": 34.99, "compareAtPrice": 44.99, "inventoryQuantity": 100 },
+      { "size": "L", "color": "Black", "sku": "BYK-BZLN-BLK-L", "price": 34.99, "compareAtPrice": 44.99, "inventoryQuantity": 100 },
+      { "size": "XL", "color": "Black", "sku": "BYK-BZLN-BLK-XL", "price": 34.99, "compareAtPrice": 44.99, "inventoryQuantity": 100 }
+    ],
+    "tags": ["christian", "byzantine", "orthodox", "lion", "faith", "streetwear"],
+    "productType": "T-Shirt",
+    "vendor": "Banyakob",
+    "status": "draft",
+    "shopifyId": null,
+    "etsyListingId": null,
+    "createdAt": "2026-03-28T00:00:00.000Z",
+    "updatedAt": "2026-03-28T00:00:00.000Z"
+  },
+  {
+    "id": "prod-002",
+    "title": "Sacred Geometry Cross Tee",
+    "description": "Sacred geometry cross pattern with gold and crimson tones on Bella+Canvas 3001",
+    "design": {
+      "id": "design-002",
+      "name": "Sacred Geometry Cross",
+      "frontImageUrl": "https://cdn.example.com/designs/sacred-cross-front.png",
+      "backImageUrl": null,
+      "createdAt": "2026-03-28T00:00:00.000Z",
+      "approvedAt": "2026-03-28T12:00:00.000Z"
+    },
+    "variants": [
+      { "size": "S", "color": "Black", "sku": "BYK-SGCR-BLK-S", "price": 32.99, "compareAtPrice": null, "inventoryQuantity": 75 },
+      { "size": "M", "color": "Black", "sku": "BYK-SGCR-BLK-M", "price": 32.99, "compareAtPrice": null, "inventoryQuantity": 75 },
+      { "size": "L", "color": "Black", "sku": "BYK-SGCR-BLK-L", "price": 32.99, "compareAtPrice": null, "inventoryQuantity": 75 },
+      { "size": "XL", "color": "Black", "sku": "BYK-SGCR-BLK-XL", "price": 32.99, "compareAtPrice": null, "inventoryQuantity": 75 }
+    ],
+    "tags": ["christian", "sacred-geometry", "cross", "faith", "streetwear", "gold"],
+    "productType": "T-Shirt",
+    "vendor": "Banyakob",
+    "status": "draft",
+    "shopifyId": null,
+    "etsyListingId": null,
+    "createdAt": "2026-03-28T00:00:00.000Z",
+    "updatedAt": "2026-03-28T00:00:00.000Z"
+  },
+  {
+    "id": "prod-003",
+    "title": "Theotokos Icon Tee",
+    "description": "Byzantine Theotokos icon art with gold leaf accents on Bella+Canvas 3001",
+    "design": {
+      "id": "design-003",
+      "name": "Theotokos Icon",
+      "frontImageUrl": "https://cdn.example.com/designs/theotokos-front.png",
+      "backImageUrl": "https://cdn.example.com/designs/theotokos-back.png",
+      "createdAt": "2026-03-28T00:00:00.000Z",
+      "approvedAt": null
+    },
+    "variants": [
+      { "size": "M", "color": "Navy", "sku": "BYK-THKT-NVY-M", "price": 36.99, "compareAtPrice": 46.99, "inventoryQuantity": 50 },
+      { "size": "L", "color": "Navy", "sku": "BYK-THKT-NVY-L", "price": 36.99, "compareAtPrice": 46.99, "inventoryQuantity": 50 },
+      { "size": "XL", "color": "Navy", "sku": "BYK-THKT-NVY-XL", "price": 36.99, "compareAtPrice": 46.99, "inventoryQuantity": 50 }
+    ],
+    "tags": ["christian", "byzantine", "theotokos", "orthodox", "icon", "faith", "gold-leaf"],
+    "productType": "T-Shirt",
+    "vendor": "Banyakob",
+    "status": "draft",
+    "shopifyId": null,
+    "etsyListingId": null,
+    "createdAt": "2026-03-28T00:00:00.000Z",
+    "updatedAt": "2026-03-28T00:00:00.000Z"
+  }
+]
