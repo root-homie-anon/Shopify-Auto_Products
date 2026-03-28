@@ -1,0 +1,19 @@
+{
+  "project": {
+    "name": "Banyakob",
+    "slug": "banyakob",
+    "version": "1.0.0"
+  },
+  "credentials": {
+    "shopify_api_key": ".env",
+    "shopify_api_secret": ".env",
+    "etsy_api_key": ".env",
+    "customcat_api_key": ".env"
+  },
+  "agents": {},
+  "features": {
+    "etsy_sync": true,
+    "fulfillment_monitoring": true,
+    "listing_automation": true
+  }
+}
