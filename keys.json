@@ -1,0 +1,114 @@
+{
+  "project": "Shopify-Auto_Products",
+  "keys": {
+    "SHOPIFY_SHOP_NAME": {
+      "scope": "project",
+      "category": "commerce",
+      "required": true
+    },
+    "SHOPIFY_API_KEY": {
+      "scope": "project",
+      "category": "commerce",
+      "required": true
+    },
+    "SHOPIFY_API_SECRET": {
+      "scope": "project",
+      "category": "commerce",
+      "required": true
+    },
+    "SHOPIFY_ACCESS_TOKEN": {
+      "scope": "project",
+      "category": "commerce",
+      "required": true
+    },
+    "ETSY_API_KEY": {
+      "required": true,
+      "source": null
+    },
+    "ETSY_API_SECRET": {
+      "required": true,
+      "source": null
+    },
+    "ETSY_ACCESS_TOKEN": {
+      "scope": "project",
+      "category": "commerce",
+      "required": true
+    },
+    "ETSY_SHOP_ID": {
+      "scope": "project",
+      "category": "commerce",
+      "required": true
+    },
+    "CUSTOMCAT_API_KEY": {
+      "scope": "project",
+      "category": "commerce",
+      "required": true
+    },
+    "CUSTOMCAT_API_URL": {
+      "scope": "project",
+      "category": "commerce",
+      "required": false,
+      "default": "https://api.customcat.com"
+    },
+    "ANTHROPIC_API_KEY": {
+      "required": true,
+      "source": "ANTHROPIC_API_KEY"
+    },
+    "BFL_API_KEY": {
+      "required": true,
+      "source": "BFL_API_KEY"
+    },
+    "META_APP_ID": {
+      "scope": "project",
+      "category": "ads",
+      "required": false
+    },
+    "META_APP_SECRET": {
+      "scope": "project",
+      "category": "ads",
+      "required": false
+    },
+    "META_ACCESS_TOKEN": {
+      "scope": "project",
+      "category": "ads",
+      "required": false
+    },
+    "META_AD_ACCOUNT_ID": {
+      "scope": "project",
+      "category": "ads",
+      "required": false
+    },
+    "META_PIXEL_ID": {
+      "scope": "project",
+      "category": "ads",
+      "required": false
+    },
+    "TIKTOK_ACCESS_TOKEN": {
+      "scope": "project",
+      "category": "social",
+      "required": false
+    },
+    "INSTAGRAM_ACCESS_TOKEN": {
+      "scope": "project",
+      "category": "social",
+      "required": false
+    },
+    "NOTIFICATION_WEBHOOK_URL": {
+      "scope": "project",
+      "category": "infra",
+      "required": false
+    },
+    "NODE_ENV": {
+      "scope": "project",
+      "category": "config",
+      "required": false,
+      "default": "development"
+    },
+    "LOG_LEVEL": {
+      "scope": "project",
+      "category": "config",
+      "required": false,
+      "default": "info"
+    }
+  }
+}

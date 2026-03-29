@@ -42,20 +42,28 @@ All agents live in `.claude/agents/` and are shared across the project.
 
 ```
 banyakob/
-├── CLAUDE.md                  ← this file, root orchestrator
+├── CLAUDE(1).md               ← this file, root orchestrator
+├── TODO.md                    ← remaining tasks for next session
 ├── .claude/
-│   └── agents/                ← all agent definitions
+│   └── agents/                ← agent definitions (orchestrator, store-manager, etc.)
 ├── .env                       ← secrets, never committed
 ├── .env.example               ← committed, documents required vars
 ├── .github/
-│   └── workflows/             ← CI/CD pipelines
-├── src/                       ← application source
-├── scripts/                   ← automation scripts
+│   └── workflows/             ← CI/CD pipelines (ci.yml, deploy.yml)
+├── src/
+│   ├── index.ts               ← CLI entry point
+│   ├── config/                ← Zod-validated env config loader
+│   ├── types/                 ← core type definitions
+│   ├── utils/                 ← logger, domain error classes
+│   ├── services/              ← shopify, customcat, etsy, meta, content, social
+│   └── agents/                ← store-manager, listing-publisher, fulfillment-monitor, orchestrator
+├── examples/                  ← sample product JSON files for CLI testing
 ├── state/                     ← runtime state, gitignored
-├── shared/                    ← shared resources
+├── shared/
 │   ├── brand-guidelines.md    ← visual identity, tone, design language
 │   └── listing-template.md   ← product title, description, tag templates
-└── config.json                ← project config schema (see below)
+├── vitest.config.ts           ← test configuration
+└── config.json                ← project config schema
 ```
 
 ---
@@ -184,25 +192,56 @@ shared/
 
 ---
 
-## Action Items — Pending Before Build
+## Build Progress (updated 2026-03-28)
 
-**CustomCat**
+### Completed
+- [x] Project scaffold — TypeScript strict, ESM, package.json, tsconfig, eslint, prettier
+- [x] `.env.example` with all 22 required env vars
+- [x] `.gitignore` — node_modules, dist, .env, state/
+- [x] `config.json` — project config schema
+- [x] Zod-validated config loader (`src/config/`)
+- [x] Core type definitions (`src/types/`) — Product, Order, Listing, ContentPost, AdCampaign, AppConfig
+- [x] Domain error classes (`src/utils/errors.ts`) — ShopifyError, EtsyError, CustomCatError, etc.
+- [x] Pino logger factory (`src/utils/logger.ts`)
+- [x] **Shopify service** — product CRUD, collections, orders, tracking updates
+- [x] **CustomCat service** — order submission, status tracking, catalog, print area specs
+- [x] **Content service** — listing copy, social captions, ad copy via Claude API
+- [x] **Meta Ads service** — campaigns, ad sets, creatives (always PAUSED until human approval)
+- [x] **Etsy service** — listings, images, sync from Shopify
+- [x] **Social service** — adapter pattern with TikTok/Instagram stubs (ready to swap when tool selected)
+- [x] **Store Manager agent** — Shopify product management, inventory sync with CustomCat
+- [x] **Listing Publisher agent** — end-to-end publish pipeline (generate copy → Shopify → Etsy)
+- [x] **Fulfillment Monitor agent** — order tracking, SLA enforcement, alerts
+- [x] **Orchestrator agent** — top-level coordinator, delegates to all three domain agents
+- [x] CLI entry point (`src/index.ts`) — publish, publish-batch, monitor, health, status commands
+- [x] 143 unit tests — data mapping, error handling, SLA logic, edge cases
+- [x] CI/CD workflows (`.github/workflows/ci.yml`, `deploy.yml`)
+- [x] `dev` branch created, PR #1 open to `main`
+- [x] Sample product JSON files (`examples/`)
+- [x] Vitest config with coverage thresholds
+- [x] Date deserialization in CLI JSON parser
+- [x] Agent definitions (`.claude/agents/`) — orchestrator, store-manager, listing-publisher, fulfillment-monitor
+- [x] Brand guidelines and listing template (`shared/`)
+
+### Remaining — Vendor Decisions (operator-owned)
 - [ ] Confirm Bella+Canvas 3001 exact print area specs — front and back
 - [ ] Confirm packing insert specs, per-order fee, and inventory ship-to address
-
-**Content Pipeline**
 - [ ] Select batch-capable video mockup tool (evaluate Botika, Krea.ai, Placeit)
 - [ ] Select social scheduling tool for TikTok and Instagram
-
-**Ads Pipeline**
 - [ ] Confirm Meta Ads account setup and pixel installation on Shopify
-
-**Design**
 - [ ] Design prompt engineering — owned by operator
 
+### Remaining — Engineering (see TODO.md for full breakdown)
+- [ ] Fill `.env` with real credentials
+- [ ] Sandbox testing against Shopify, CustomCat, Etsy APIs
+- [ ] Integration tests
+- [ ] Implement social adapter once tool is selected
+- [ ] Add Meta page ID to config (needed for ad creative creation)
+- [ ] Deploy pipeline configuration
+- [ ] Webhook/notification channel setup
+
 ## Initialization Checklist
-- [ ] Clone repo and run `npm install`
+- [x] Clone repo and run `npm install`
 - [ ] Copy `.env.example` → `.env` and fill in all values
-- [ ] Run `bash ~/.claude/hooks/session-start.sh "banyakob" "$(pwd)"`
 - [ ] Verify agents load correctly
 - [ ] Confirm CI pipeline is green

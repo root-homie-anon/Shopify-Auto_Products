@@ -1,0 +1,33 @@
+{
+  "id": "prod-001",
+  "title": "Byzantine Lion Tee",
+  "description": "Gold-toned Byzantine lion iconography on premium Bella+Canvas 3001",
+  "design": {
+    "id": "design-001",
+    "name": "Byzantine Lion",
+    "frontImageUrl": "https://cdn.example.com/designs/byzantine-lion-front.png",
+    "backImageUrl": "https://cdn.example.com/designs/byzantine-lion-back.png",
+    "createdAt": "2026-03-28T00:00:00.000Z",
+    "approvedAt": "2026-03-28T12:00:00.000Z"
+  },
+  "variants": [
+    { "size": "S", "color": "Black", "sku": "BYK-BZLN-BLK-S", "price": 34.99, "compareAtPrice": 44.99, "inventoryQuantity": 100 },
+    { "size": "M", "color": "Black", "sku": "BYK-BZLN-BLK-M", "price": 34.99, "compareAtPrice": 44.99, "inventoryQuantity": 100 },
+    { "size": "L", "color": "Black", "sku": "BYK-BZLN-BLK-L", "price": 34.99, "compareAtPrice": 44.99, "inventoryQuantity": 100 },
+    { "size": "XL", "color": "Black", "sku": "BYK-BZLN-BLK-XL", "price": 34.99, "compareAtPrice": 44.99, "inventoryQuantity": 100 },
+    { "size": "2XL", "color": "Black", "sku": "BYK-BZLN-BLK-2XL", "price": 36.99, "compareAtPrice": 46.99, "inventoryQuantity": 50 },
+    { "size": "S", "color": "White", "sku": "BYK-BZLN-WHT-S", "price": 34.99, "compareAtPrice": 44.99, "inventoryQuantity": 100 },
+    { "size": "M", "color": "White", "sku": "BYK-BZLN-WHT-M", "price": 34.99, "compareAtPrice": 44.99, "inventoryQuantity": 100 },
+    { "size": "L", "color": "White", "sku": "BYK-BZLN-WHT-L", "price": 34.99, "compareAtPrice": 44.99, "inventoryQuantity": 100 },
+    { "size": "XL", "color": "White", "sku": "BYK-BZLN-WHT-XL", "price": 34.99, "compareAtPrice": 44.99, "inventoryQuantity": 100 },
+    { "size": "2XL", "color": "White", "sku": "BYK-BZLN-WHT-2XL", "price": 36.99, "compareAtPrice": 46.99, "inventoryQuantity": 50 }
+  ],
+  "tags": ["christian", "byzantine", "orthodox", "lion", "faith", "streetwear", "icon", "gold", "bella-canvas-3001"],
+  "productType": "T-Shirt",
+  "vendor": "Banyakob",
+  "status": "draft",
+  "shopifyId": null,
+  "etsyListingId": null,
+  "createdAt": "2026-03-28T00:00:00.000Z",
+  "updatedAt": "2026-03-28T00:00:00.000Z"
+}

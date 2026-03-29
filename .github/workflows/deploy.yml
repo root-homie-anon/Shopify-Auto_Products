@@ -1,0 +1,51 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # ---------------------------------------------------------
+      # Deployment steps — wire up when platform is chosen.
+      # Recommended options for this stack:
+      #   Railway   — full-stack + background workers, simple scaling
+      #   Render    — web services + cron jobs
+      #   Fly.io    — containers, global distribution
+      #
+      # Add the provider's deploy action or CLI call here.
+      # Store all credentials as GitHub Actions secrets — never
+      # hardcode them in this file.
+      # ---------------------------------------------------------
+
+      - name: Deploy (placeholder)
+        run: echo "Deployment target not yet configured. Add platform deploy step here."
