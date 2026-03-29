@@ -42,6 +42,9 @@ import {
   createContentClient,
   generateListingCopy,
 } from '../services/content/index.js';
+import { createImageClient } from '../services/image/index.js';
+
+import type { ImageProvider } from '../services/image/index.js';
 
 import type Shopify from 'shopify-api-node';
 import type Anthropic from '@anthropic-ai/sdk';
@@ -70,6 +73,7 @@ export interface ListingPublisherClients {
   readonly shopify: InstanceType<typeof Shopify>;
   readonly etsy: EtsyClient;
   readonly content: Anthropic;
+  readonly image: ImageProvider;
 }
 
 /**
@@ -202,7 +206,8 @@ export function initListingPublisher(config: AppConfig): ListingPublisherClients
   const shopify = createShopifyClient(config.shopify);
   const etsy = createEtsyClient(config.etsy);
   const content = createContentClient(config.anthropic);
-  return { shopify, etsy, content };
+  const image = createImageClient(config.bfl);
+  return { shopify, etsy, content, image };
 }
 
 /**

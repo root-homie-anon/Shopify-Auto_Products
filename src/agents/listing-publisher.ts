@@ -29,6 +29,13 @@ import {
   generateBatchListingCopy,
 } from '../services/content/index.js';
 
+import {
+  createImageClient,
+  generateArtwork,
+} from '../services/image/index.js';
+
+import type { ImageProvider } from '../services/image/index.js';
+
 import { createLogger } from '../utils/logger.js';
 import { ListingError } from '../utils/errors.js';
 
@@ -62,6 +69,7 @@ export interface PublisherClients {
   readonly shopify: InstanceType<typeof Shopify>;
   readonly etsy: EtsyClient;
   readonly content: Anthropic;
+  readonly image: ImageProvider;
 }
 
 // ----------------------------------------------------------------
@@ -250,6 +258,7 @@ export function initListingPublisher(config: AppConfig): PublisherClients {
     shopify: createShopifyClient(config.shopify),
     etsy: createEtsyClient(config.etsy),
     content: createContentClient(config.anthropic),
+    image: createImageClient(config.bfl),
   };
 }
 

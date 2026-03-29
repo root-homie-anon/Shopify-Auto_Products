@@ -177,7 +177,7 @@ export interface AppConfig {
   readonly anthropic: {
     readonly apiKey: string;
   };
-  readonly openai: {
+  readonly bfl: {
     readonly apiKey: string;
   };
   readonly meta: {

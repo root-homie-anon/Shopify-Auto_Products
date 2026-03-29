@@ -26,8 +26,8 @@ const envSchema = z.object({
   // Anthropic
   ANTHROPIC_API_KEY: z.string().min(1),
 
-  // OpenAI
-  OPENAI_API_KEY: z.string().min(1),
+  // BFL (Flux 2 Pro — artwork generation)
+  BFL_API_KEY: z.string().min(1),
 
   // Meta
   META_APP_ID: z.string().min(1),
@@ -87,8 +87,8 @@ export function loadConfig(): AppConfig {
     anthropic: {
       apiKey: env.ANTHROPIC_API_KEY,
     },
-    openai: {
-      apiKey: env.OPENAI_API_KEY,
+    bfl: {
+      apiKey: env.BFL_API_KEY,
     },
     meta: {
       appId: env.META_APP_ID,

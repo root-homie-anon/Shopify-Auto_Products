@@ -74,7 +74,7 @@ const appConfig: AppConfig = {
   etsy: { apiKey: 'k', apiSecret: 's', accessToken: 't', shopId: 'shop-1' },
   customcat: { apiKey: 'k', apiUrl: 'https://cc.test' },
   anthropic: { apiKey: 'sk-ant' },
-  openai: { apiKey: 'sk-oai' },
+  bfl: { apiKey: 'bfl-test' },
   meta: { appId: 'a', appSecret: 'b', accessToken: 'c', adAccountId: 'd', pixelId: 'e' },
   notifications: { webhookUrl: 'https://notify.test/hook' },
   app: { nodeEnv: 'development', logLevel: 'error' },

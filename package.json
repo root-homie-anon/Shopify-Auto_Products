@@ -17,23 +17,22 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "shopify-api-node": "^3.13.0",
     "@anthropic-ai/sdk": "^0.39.0",
-    "openai": "^4.77.0",
-    "sharp": "^0.33.2",
     "dotenv": "^16.4.7",
-    "zod": "^3.24.1",
+    "node-fetch": "^3.3.2",
     "pino": "^9.6.0",
-    "node-fetch": "^3.3.2"
+    "sharp": "^0.33.2",
+    "shopify-api-node": "^3.13.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
-    "typescript": "^5.7.3",
-    "tsx": "^4.19.2",
+    "@eslint/js": "^9.18.0",
     "@types/node": "^22.10.5",
     "eslint": "^9.18.0",
-    "@eslint/js": "^9.18.0",
-    "typescript-eslint": "^8.20.0",
     "prettier": "^3.4.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0",
     "vitest": "^2.1.8"
   },
   "engines": {
