@@ -1,20 +1,26 @@
 # Banyakob — Remaining Tasks
 
-Last updated: 2026-03-28
+Last updated: 2026-03-29
 
 ---
 
 ## Priority 1 — Credentials & Sandbox Testing
 
-- [ ] Copy `.env.example` → `.env` and fill in all API credentials
-- [ ] Set up Shopify dev store (or use existing) and test product creation
-- [ ] Test CustomCat API connectivity — verify order submission and status endpoints
-- [ ] Test Etsy API connectivity — verify listing creation and image upload
-- [ ] Test Content service — run `npx tsx src/index.ts publish examples/sample-product.json` end-to-end
-- [ ] Test batch pipeline — run `npx tsx src/index.ts publish-batch examples/sample-batch.json`
-- [ ] Test fulfillment monitor — run `npx tsx src/index.ts monitor`
+> **BLOCKER:** Pipeline cannot be tested until Shopify credentials are in place.
+> Shopify app setup is the critical path — everything downstream depends on it.
+
+- [ ] **Create Shopify custom app** — go to Shopify Admin → Settings → Apps → Develop apps → create app, grant Admin API scopes (products, orders, fulfillments), get access token
+- [ ] Add Shopify credentials to keymaster: `SHOPIFY_SHOP_NAME`, `SHOPIFY_API_KEY`, `SHOPIFY_API_SECRET`, `SHOPIFY_ACCESS_TOKEN`
+- [ ] Add CustomCat API key to keymaster — **BLOCKER:** need CustomCat account set up first
+- [ ] Run Etsy OAuth flow for Banyakob shop — reuse existing `ETSY_API_KEY`/`ETSY_API_SECRET` from printpilot, get new `ETSY_ACCESS_TOKEN` + `ETSY_SHOP_ID`
+- [ ] Run `keymaster sync Shopify-Auto_Products` to generate `.env`
+- [ ] Smoke test: `npx tsx src/index.ts publish examples/sample-product.json`
+- [ ] Smoke test: `npx tsx src/index.ts publish-batch examples/sample-batch.json`
+- [ ] Smoke test: `npx tsx src/index.ts monitor`
 
 ## Priority 2 — Integration Tests
+
+> **BLOCKED BY:** P1 — needs live credentials before tests can be written against real APIs
 
 - [ ] Write integration tests for Shopify service against dev store sandbox
 - [ ] Write integration tests for CustomCat order lifecycle (submit → status → tracking)
@@ -25,14 +31,17 @@ Last updated: 2026-03-28
 
 ## Priority 3 — Known Gaps
 
+- [x] ~~**Image generation service**~~ — BFL Flux 2 Pro integrated (`src/services/image/`), wired into listing-publisher and orchestrator (completed 2026-03-28)
 - [ ] **Meta Ads: Add `pageId` to AppConfig** — `createAdCreative` currently uses `adAccountId` as `page_id` in `object_story_spec`, but the Graph API requires a Facebook Page ID. Add `META_PAGE_ID` to `.env.example`, `AppConfig['meta']`, and the config loader.
-- [ ] **Social adapter implementation** — once a scheduling tool is selected (Botika/Later/Buffer/etc.), implement the `SocialPlatformAdapter` for TikTok and Instagram in `src/services/social/index.ts`
-- [ ] **Video mockup pipeline** — once a video mockup tool is selected, add a new service at `src/services/video/index.ts` and wire into the content pipeline
+- [ ] **Social adapter implementation** — **BLOCKED BY:** vendor decision on scheduling tool (Botika/Later/Buffer/etc.). Implement `SocialPlatformAdapter` for TikTok and Instagram in `src/services/social/index.ts`
+- [ ] **Video mockup pipeline** — **BLOCKED BY:** vendor decision on video tool. Add service at `src/services/video/index.ts` and wire into content pipeline
 - [ ] **Webhook/notification setup** — configure `NOTIFICATION_WEBHOOK_URL` in `.env` (Slack, Discord, or custom endpoint) for fulfillment alerts
 - [ ] **Product JSON validation** — add Zod schema to validate product JSON input in the CLI before passing to orchestrator (currently just casts to `Product`)
 - [ ] **Date fields in Product JSON** — CLI has a JSON reviver for ISO dates, but a Zod schema would be more robust
 
 ## Priority 4 — Production Readiness
+
+> **BLOCKED BY:** P1 smoke tests — no point deploying until the pipeline runs locally
 
 - [ ] **Deploy pipeline** — select deployment platform (Railway/Render/Fly.io) and configure `.github/workflows/deploy.yml`
 - [ ] **Cron scheduling** — set up recurring fulfillment monitoring (e.g., every 30 minutes via cron or serverless scheduler)
