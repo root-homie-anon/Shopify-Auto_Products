@@ -33,8 +33,6 @@ Last updated: 2026-03-29
 
 - [x] ~~**Image generation service**~~ — BFL Flux 2 Pro integrated (`src/services/image/`), wired into listing-publisher and orchestrator (completed 2026-03-28)
 - [ ] **Meta Ads: Add `pageId` to AppConfig** — `createAdCreative` currently uses `adAccountId` as `page_id` in `object_story_spec`, but the Graph API requires a Facebook Page ID. Add `META_PAGE_ID` to `.env.example`, `AppConfig['meta']`, and the config loader.
-- [ ] **Social adapter implementation** — **BLOCKED BY:** vendor decision on scheduling tool (Botika/Later/Buffer/etc.). Implement `SocialPlatformAdapter` for TikTok and Instagram in `src/services/social/index.ts`
-- [ ] **Video mockup pipeline** — **BLOCKED BY:** vendor decision on video tool. Add service at `src/services/video/index.ts` and wire into content pipeline
 - [ ] **Webhook/notification setup** — configure `NOTIFICATION_WEBHOOK_URL` in `.env` (Slack, Discord, or custom endpoint) for fulfillment alerts
 - [ ] **Product JSON validation** — add Zod schema to validate product JSON input in the CLI before passing to orchestrator (currently just casts to `Product`)
 - [ ] **Date fields in Product JSON** — CLI has a JSON reviver for ISO dates, but a Zod schema would be more robust
@@ -55,10 +53,13 @@ Last updated: 2026-03-29
 
 - [ ] Confirm Bella+Canvas 3001 print area specs (front and back) with CustomCat
 - [ ] Confirm packing insert specs and per-order fee with CustomCat
-- [ ] Select video mockup tool — evaluate Botika, Krea.ai, Placeit
-- [ ] Select social scheduling tool for TikTok + Instagram
 - [ ] Confirm Meta Ads account setup and pixel installation on Shopify
 - [ ] Complete design prompt engineering workflow
+
+## Post-Launch
+
+- [ ] **Social adapter implementation** — select scheduling tool (Botika/Later/Buffer/etc.), implement `SocialPlatformAdapter` for TikTok and Instagram in `src/services/social/index.ts`
+- [ ] **Video mockup pipeline** — select video tool (Botika/Krea.ai/Placeit), add service at `src/services/video/index.ts` and wire into content pipeline
 
 ---
 
